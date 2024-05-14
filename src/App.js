@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Login from "./Components/Login";
+import Main from "./Components/Main";
+import Headers from "./Components/Common/Headers";
+import { ToastContainer } from "react-toastify";
+import Notification from "./Components/Common/Notification";
 
 function App() {
+  const [islogin, setIsLogin] = useState(
+    localStorage.getItem("token") ? true : false
+  );
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
+    setIsLogin(false);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <div className="App">
+        <Notification />
+        <header className="App-header">
+          {islogin ? (
+            <React.Fragment>
+              <Headers logoutHandler={logoutHandler} />
+              <Main />
+            </React.Fragment>
+          ) : (
+            <Login setIsLogin={setIsLogin} />
+          )}
+          <ToastContainer />
+        </header>
+      </div>
+    </React.Fragment>
   );
 }
 
