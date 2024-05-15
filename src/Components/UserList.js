@@ -7,8 +7,8 @@ import NotificationContext from "../Context_Providers/NotificationContext";
 import Pagination from "./Common/Pagination";
 
 function UserList() {
-  let [totalUsers, setTotalUsers] = useState(10);
-  let [perPageCount, setPerPageCount] = useState(3);
+  let [totalUsers, setTotalUsers] = useState(0);
+  let [perPageCount, setPerPageCount] = useState(10);
   let [users, setUsers] = useState([]);
   let [isLoading, setIsLoading] = useState(true);
   let [error, setError] = useState(null);
